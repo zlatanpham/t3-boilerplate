@@ -1,16 +1,8 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import {
-  type DefaultSession,
-  type Account, // Import Account
-  type Profile, // Import Profile
-  type User,
-  type NextAuthConfig, // Import User from next-auth
-} from "next-auth";
-import { type AdapterUser } from "next-auth/adapters"; // Import AdapterUser
+import { type DefaultSession, type User, type NextAuthConfig } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { type JWT } from "next-auth/jwt";
 
 import { db } from "@/server/db";
 import type { PrismaClient, User as PrismaUser } from "@prisma/client";
@@ -93,22 +85,13 @@ export const authConfig = {
     strategy: "jwt", // Credentials provider requires JWT strategy
   },
   callbacks: {
-    jwt: async ({
-      token,
-      user,
-    }: {
-      token: JWT;
-      user: AdapterUser | User; // Use AdapterUser | User from next-auth
-      account: Account | null;
-      profile?: Profile;
-      trigger?: "signIn" | "signUp" | "update";
-    }) => {
+    jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id;
       }
       return token;
     },
-    session: ({ session, token }: { session: DefaultSession; token: JWT }) => {
+    session: ({ session, token }) => {
       return {
         ...session,
         user: {
