@@ -1,0 +1,44 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# turbo
+.turbo
+
+# prisma
+prisma/migrations/
+
+# generated files
+*.generated.*
+/public/generated/
+
+# cache
+.cache/
+.eslintcache
+
+# lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
