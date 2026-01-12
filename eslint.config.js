@@ -1,15 +1,11 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import nextConfig from "eslint-config-next";
 import tseslint from "typescript-eslint";
-
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-});
 
 export default tseslint.config(
   {
-    ignores: [".next"],
+    ignores: [".next", "prisma/generated"],
   },
-  ...compat.extends("next/core-web-vitals"),
+  ...nextConfig,
   {
     files: ["**/*.ts", "**/*.tsx"],
     extends: [
@@ -46,8 +42,8 @@ export default tseslint.config(
     },
     languageOptions: {
       parserOptions: {
-        project: ["./tsconfig.json"], // Explicitly tell ESLint where to find the tsconfig
-        tsconfigRootDir: import.meta.dirname, // Ensure correct root directory for tsconfig
+        project: ["./tsconfig.json"],
+        tsconfigRootDir: import.meta.dirname,
       },
     },
   },
