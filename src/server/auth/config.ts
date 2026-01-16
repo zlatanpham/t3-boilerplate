@@ -5,7 +5,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
 import { db } from "@/server/db";
-import type { PrismaClient, User as PrismaUser } from "@prisma/client";
+import type {
+  PrismaClient,
+  User as PrismaUser,
+} from "../../../prisma/generated/prisma/client";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
